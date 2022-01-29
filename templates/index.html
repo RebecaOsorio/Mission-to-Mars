@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Mission to Mars</title>
+        <!-- Latest compiled and minified CSS -->
+        <link 
+        rel="stylesheet" 
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+        crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link 
+        rel="stylesheet" 
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" 
+        crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container">
+        <!-- Add Jumbotron to Header -->
+        <div class="jumbotron text-center">
+            <h1>Mission to Mars</h1>
+            <!-- Add a button to activate scraping script -->
+            <p><a class="btn btn-success btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        </div>
+        
+        <!-- Section for Mars News -->
+        <div class="row" id="mars-news">
+            <div class="col-md-12 col-sm-12">
+            <div class="media">
+                <div class="media-body">
+                <h2>Latest Mars News</h2>
+                <h4 class="media-heading">{{ mars.news_title }}</h4>
+                <p>{{ mars.news_paragraph }}</p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Section for Featured Image and Facts table -->
+        <div class="row" id="mars-featured-image">
+            <div class="col-md-8 col-sm-8" style="width: best;">
+                <h2>Featured Mars Image</h2>
+                <img
+                    src="{{mars.featured_image}}"
+                    class="img-responsive img-thumbnail"
+                    alt="Responsive image"
+                    style="width: best;"
+                />
+            </div>
+            <!-- Mars Facts -->
+            <div class="col-md-4 col-sm-4" style="width: best;">
+                <div class="row" id="mars-facts">
+                    <h4>Mars Facts</h4>
+                    <div class="table-responsive">
+                        {{ mars.facts | safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section for Mars Hemispheres -->
+        <div class="row" id="mars-hemispheres-title">
+            <div class="page-header col-md-12 col-sm-12">
+            <h2 class="text-center">Mars Hemispheres</h2>
+            </div>
+        </div>
+        <div class="card-deck">
+            <div class='col-md-12 col-sm-12'>
+                <div class="row">
+                    {% for hemisphere in mars.mars_hemispheres %}
+                    <div class="col-md-6 col-sm-3 text-center">                   
+                        <div class="thumbnail mb-6 text-center"  style="width: best;">
+                            <img class="card-img-top" src="{{hemisphere.img_url}}" style="width: best;"/>
+                            <div class="caption">
+                                <h4>{{hemisphere.title}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+        </div>
+    </body>
+</html>
